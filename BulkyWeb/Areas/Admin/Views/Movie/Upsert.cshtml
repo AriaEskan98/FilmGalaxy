@@ -1,0 +1,119 @@
+﻿@model CreateMovieDTO
+<div class="container mt-5">
+    <div class="card shadow border-0 mt-3">
+        <div class="card-header bg-secondary bg-gradient py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3 class="text-white py-2">@(Model.MovieId == 0? "Create":"Update") Movie</h3>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="card-body">
+            <form class="row" asp-area="Admin" asp-action="Upsert" asp-controller="Movie" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly"></div>
+                <input asp-for="MovieId" hidden/>
+                <input asp-for="ImgURL" hidden />
+                <duv class="row">
+                    <div class="col-10">
+                        <div class="form-floating py-2 col-12 mb-3">
+                            <input asp-for="Name" class="form-control border-0 shadow" placeholder="Enter category name" />
+                            <label asp-for="Name" class="form-label ms-2">Movie Name</label>
+
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class=" mb-3">
+                            <label asp-for="Description" class="form-label ms-2 text-muted">Description</label>
+                            <textarea asp-for="Description" class="form-control border-0 shadow" placeholder="Enter Description"></textarea>
+
+
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Director" class="form-control border-0 shadow" placeholder="Enter Director" />
+                            <label asp-for="Director" class="form-label ms-2">Director</label>
+
+                            <span asp-validation-for="Director" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Date" type="date" class="form-control border-0 shadow" placeholder="Enter Date" />
+                            <label asp-for="Date" class="form-label ms-2">Date</label>
+
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="ListPrice" type="number" class="form-control border-0 shadow" placeholder="Enter Price List" />
+                            <label asp-for="ListPrice" class="form-label ms-2">Price List</label>
+
+                            <span asp-validation-for="ListPrice" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select asp-for="Category.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0 shadow">
+                                <option disabled selected>--Select Category--</option>
+
+                            </select>
+                            <label asp-for="Category.CategoryId" class="form-label ms-2">Category</label>
+                            <span asp-validation-for="Category.CategoryId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Price" type="number" class="form-control border-0 shadow" placeholder="Enter Price" />
+                            <label asp-for="Price" class="form-label ms-2">Price</label>
+
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Price50" type="number" class="form-control border-0 shadow" placeholder="Enter Price after 50 Purchases" />
+                            <label asp-for="Price50" class="form-label ms-2">Price after 50 Purchases</label>
+
+                            <span asp-validation-for="Price50" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Price100" type="number" class="form-control border-0 shadow" placeholder="Enter Price after 100 Purchases" />
+                            <label asp-for="Price100" class="form-label ms-2">Price after 100 Purchases</label>
+
+                            <span asp-validation-for="Price100" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating py-2 col-12">
+                            <input type="file" name="file" class="form-control border-0 shadow" />
+                            <label asp-for="ImgURL" class="ms-2"></label>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-area="Admin" asp-action="Index" asp-controller="Movie" class="btn btn-outline-primary">Back to List</a>
+                            <button type="submit" class="btn btn-primary">@(Model.MovieId == 0 ? "Create" : "Update")</button>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <img src="@Model.ImgURL" width="100%" style="border:1px solid #bbb9b9;"/>
+                        
+                    </div>
+                </duv>
+               
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons  lists   table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent',
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

@@ -1,0 +1,81 @@
+﻿@model UpdateMovieDTO
+
+<div class="container mt-5">
+    <div class="card shadow border-0 mt-3">
+        <div class="card-header bg-secondary bg-gradient py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3 class="text-white py-2">Delete Category</h3>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <input type="hidden" asp-for="MovieId" />
+
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="form-floating py-2 col-12 mb-3">
+                    <input asp-for="Name" disabled class="form-control border-0 shadow" placeholder="Enter category name" />
+                    <label asp-for="Name" class="form-label ms-2">Movie Name</label>
+
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Description" disabled class="form-control border-0 shadow" placeholder="Enter Description" />
+                    <label asp-for="Description" class="form-label ms-2">Description</label>
+
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Director" disabled class="form-control border-0 shadow" placeholder="Enter Director" />
+                    <label asp-for="Director" class="form-label ms-2">Director</label>
+
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Date" disabled type="date" class="form-control border-0 shadow" placeholder="Enter Date" />
+                    <label asp-for="Date" class="form-label ms-2">Date</label>
+
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="ListPrice" disabled type="number" class="form-control border-0 shadow" placeholder="Enter Price List" />
+                    <label asp-for="ListPrice" class="form-label ms-2">Price List</label>
+
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Price" disabled type="number" class="form-control border-0 shadow" placeholder="Enter Price" />
+                    <label asp-for="Price" class="form-label ms-2">Price</label>
+
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Price50" disabled type="number" class="form-control border-0 shadow" placeholder="Enter Price after 50 Purchases" />
+                    <label asp-for="Price50" class="form-label ms-2">Price after 50 Purchases</label>
+
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Price100" disabled type="number" class="form-control border-0 shadow" placeholder="Enter Price after 100 Purchases" />
+                    <label asp-for="Price100" class="form-label ms-2">Price after 100 Purchases</label>
+
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-area="Admin" asp-action="Index" asp-controller="Movie" class="btn btn-outline-primary">Back to List</a>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
